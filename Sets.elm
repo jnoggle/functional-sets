@@ -132,3 +132,23 @@ size set =
 
         Tree _ _ left right ->
             1 + size left + size right
+
+
+foldl : (comparable -> a -> a) -> a -> Set comparable -> a
+foldl fn acc set =
+    case set of
+        Empty ->
+            acc
+
+        Tree _ head left right ->
+            let
+                accLeft =
+                    foldl fn acc left
+
+                accHead =
+                    fn head accLeft
+
+                accRight =
+                    foldl fn accHead right
+            in
+                accRight

@@ -122,3 +122,13 @@ member item set =
                 member item right
             else
                 True
+
+
+size : Set comparable -> Int
+size set =
+    case set of
+        Empty ->
+            0
+
+        Tree _ _ left right ->
+            1 + size left + size right

@@ -124,14 +124,14 @@ member item set =
                 True
 
 
-size : Set comparable -> Int
-size set =
-    case set of
-        Empty ->
-            0
+memberWithFoldl : comparable -> Set comparable -> Bool
+memberWithFoldl item =
+    foldl (\candidate acc -> acc || (candidate == item)) False
 
-        Tree _ _ left right ->
-            1 + size left + size right
+
+size : Set comparable -> Int
+size =
+    foldl (\_ acc -> acc + 1) 0
 
 
 foldl : (comparable -> a -> a) -> a -> Set comparable -> a

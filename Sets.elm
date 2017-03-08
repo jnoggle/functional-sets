@@ -152,3 +152,23 @@ foldl fn acc set =
                     foldl fn accHead right
             in
                 accRight
+
+
+foldr : (comparable -> a -> a) -> a -> Set comparable -> a
+foldr fn acc set =
+    case set of
+        Empty ->
+            acc
+
+        Tree _ head left right ->
+            let
+                accRight =
+                    foldr fn acc right
+
+                accHead =
+                    fn head accRight
+
+                accLeft =
+                    foldr fn accHead left
+            in
+                accLeft

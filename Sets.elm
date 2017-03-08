@@ -107,3 +107,18 @@ balance set =
             else
                 -- diff is -1, 0, or 1. Already balanced, no operation required.
                 set
+
+
+member : comparable -> Set comparable -> Bool
+member item set =
+    case set of
+        Empty ->
+            False
+
+        Tree _ head left right ->
+            if item < head then
+                member item left
+            else if item > head then
+                member item right
+            else
+                True
